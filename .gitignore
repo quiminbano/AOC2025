@@ -6,3 +6,4 @@ miniInput.txt
 .vscode
 a.out
 day3/
+.cargo/
