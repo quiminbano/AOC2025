@@ -13,7 +13,7 @@ static uint64_t getSumOfJoltsPartTwo(const std::vector<std::string>& inputToAnal
 	uint64_t	result{0};
 	char		maxChar{0};
 	char		minChar{0};
-	size_t		cohortIndex{0};
+	size_t		pivotIndex{0};
 	size_t		filterIndex{0};
 	size_t		sizeStrings{0};
 	std::string	bankOfChars{};
@@ -22,28 +22,28 @@ static uint64_t getSumOfJoltsPartTwo(const std::vector<std::string>& inputToAnal
 	{
 		bankOfChars.clear();
 		sizeStrings = input.size();
-		cohortIndex = sizeStrings - 12;
+		pivotIndex = sizeStrings - 12;
 		maxChar = *(std::ranges::max_element(input));
 		minChar = *(std::ranges::min_element(input));
 		filterIndex = 0;
 		while (maxChar >= minChar)
 		{
-			while (maxChar >= input[cohortIndex] && input.find(maxChar, filterIndex) != std::string::npos &&
-					input.find(maxChar, filterIndex) <= cohortIndex && bankOfChars.size() < 12)
+			while (maxChar >= input[pivotIndex] && input.find(maxChar, filterIndex) != std::string::npos &&
+					input.find(maxChar, filterIndex) <= pivotIndex && bankOfChars.size() < 12)
 			{
 				bankOfChars.push_back(maxChar);
 				filterIndex = (input.find(maxChar, filterIndex) + 1);
-				++cohortIndex;
+				++pivotIndex;
 			}
 			--maxChar;
-			if (bankOfChars.size() == 12 || maxChar < input[cohortIndex])
+			if (bankOfChars.size() == 12 || maxChar < input[pivotIndex])
 			{
 				break;
 			}
 		}
-		if ((sizeStrings - cohortIndex) > 0 && (sizeStrings - cohortIndex) == (12 - bankOfChars.size()))
+		if ((sizeStrings - pivotIndex) > 0 && (sizeStrings - pivotIndex) == (12 - bankOfChars.size()))
 		{
-			bankOfChars += input.substr(cohortIndex, sizeStrings);
+			bankOfChars += input.substr(pivotIndex, sizeStrings);
 		}
 		result += std::stoull(bankOfChars);
 	}
