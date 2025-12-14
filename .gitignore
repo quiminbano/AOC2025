@@ -5,5 +5,5 @@ miniInput.txt
 .clangd
 .vscode
 a.out
-day3/
 .cargo/
+day8/
